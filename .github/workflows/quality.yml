@@ -1,0 +1,25 @@
+name: Website quality
+on:
+  push:
+    branches: [main]
+  pull_request:
+jobs:
+  static-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate required files
+        run: |
+          test -f index.html
+          test -f robots.txt
+          test -f sitemap.xml
+          test -f assets/css/site.css
+          test -f assets/js/site.js
+      - name: Check HTML documents have doctype and title
+        run: |
+          for f in *.html; do
+            grep -qi '<!doctype html>' "$f"
+            grep -qi '<title>' "$f"
+          done
+      - name: Check sitemap is XML-shaped
+        run: grep -q '<urlset' sitemap.xml
