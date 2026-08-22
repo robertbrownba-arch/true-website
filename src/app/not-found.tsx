@@ -1,0 +1,1 @@
+import Link from 'next/link';export default function NotFound(){return <main id="main"><section className="hero"><div className="container"><div className="eyebrow">404</div><h1>That Page Couldn't Be Found</h1><p>The service or page may have moved. Start from the OnyxTech service directory.</p><Link className="btn" href="/services">View Services</Link></div></section></main>}
