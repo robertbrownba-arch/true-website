@@ -1,0 +1,2 @@
+import type {MetadataRoute} from 'next';import {services} from '@/lib/services';
+export default function sitemap():MetadataRoute.Sitemap{const base='https://www.onyxtechsolutions.info';const fixed=['','services','booking','about','contact','faq','privacy','terms','accessibility'];return [...fixed.map(path=>({url:`${base}/${path}`,changeFrequency:'monthly' as const,priority:path===''?1:.7})),...services.map(s=>({url:`${base}/services/${s.slug}`,changeFrequency:'monthly' as const,priority:.85}))];}
