@@ -1,0 +1,29 @@
+name: Next.js quality
+
+on:
+  push:
+    branches: [nextjs-typescript-migration, main]
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build Next.js application
+        run: npm run build
+        env:
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          LEADS_TO_EMAIL: ${{ secrets.LEADS_TO_EMAIL }}
+          LEADS_FROM_EMAIL: ${{ secrets.LEADS_FROM_EMAIL }}
